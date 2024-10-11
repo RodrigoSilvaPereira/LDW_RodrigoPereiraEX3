@@ -16,13 +16,11 @@ class CarService:
     def get_cars():
         return list(mongo.db.cars.find())
 
-    # Função para coletar registro único - listar um único carro
     @staticmethod
     def get_car_by_id(id):
         return mongo.db.cars.find_one({'_id': ObjectId(id)})
 
     def update_car(self, id):
-        # Atualiza o carro e retorna o documento atualizado
         updated_car = mongo.db.cars.find_one_and_update(
             {'_id': ObjectId(id)},
             {'$set': {
@@ -30,7 +28,7 @@ class CarService:
                 'specifications': self.specifications,
                 'year': self.year,
             }},
-            return_document=True  # Garante que o documento retornado seja atualizado
+            return_document=True
         )
         return updated_car
 

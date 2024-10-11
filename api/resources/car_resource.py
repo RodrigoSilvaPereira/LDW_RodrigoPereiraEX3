@@ -15,14 +15,13 @@ class CarList(Resource):
     
     def post(self):
         car_schema_inst = car_schema.CarSchema()
-        json_data = request.get_json()  # Captura os dados da requisição
+        json_data = request.get_json()
 
         # Valida os dados recebidos
         validate = car_schema_inst.validate(json_data)
         if validate:  # Se houver erros de validação
-            return make_response(jsonify(validate), 400)  # Retorna 400 (BAD REQUEST)
+            return make_response(jsonify(validate), 400)
 
-        # Se a validação passou, cria o carro
         new_car = car_model.Car(
             model=json_data['model'],
             specifications=json_data['specifications'],
@@ -32,7 +31,7 @@ class CarList(Resource):
         # Adiciona o carro ao banco de dados
         result = CarService.add_car(new_car)
         res = car_schema_inst.jsonify(result)
-        return make_response(res, 201)  # Retorna 201 (CREATED)
+        return make_response(res, 201)
 
 
 class CarDetails(Resource):
