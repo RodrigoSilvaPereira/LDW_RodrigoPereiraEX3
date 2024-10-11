@@ -1,14 +1,14 @@
 from api import app, mongo
-from api.models.game_model import Game
-from api.services.game_service import GameService
+from api.models.car_model import Car
+from api.services.car_service import CarService
 
 if __name__ == '__main__':
     with app.app_context():
-        if 'games' not in mongo.db.list_collection_names():
-            game = Game(
-                title = '',
-                descriptions = '',
-                year = 0    
+        if 'cars' not in mongo.db.list_collection_names():
+            car = Car(
+                model='',
+                specifications={},
+                year=0
             )
-            GameService.add_game(game)
+            CarService.add_car(car)
     app.run(port=5000, debug=True)
