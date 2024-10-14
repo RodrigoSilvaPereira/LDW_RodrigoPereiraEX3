@@ -17,9 +17,8 @@ class CarList(Resource):
         car_schema_inst = car_schema.CarSchema()
         json_data = request.get_json()
 
-        # Valida os dados recebidos
         validate = car_schema_inst.validate(json_data)
-        if validate:  # Se houver erros de validação
+        if validate:
             return make_response(jsonify(validate), 400)
 
         new_car = car_model.Car(
@@ -28,7 +27,6 @@ class CarList(Resource):
             year=json_data['year']
         )
 
-        # Adiciona o carro ao banco de dados
         result = CarService.add_car(new_car)
         res = car_schema_inst.jsonify(result)
         return make_response(res, 201)
