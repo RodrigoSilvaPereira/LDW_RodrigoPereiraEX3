@@ -149,7 +149,7 @@ pip install flask-marshmallow
 
 ```json
 {
-  "model": "Fusca",
+  "model": "Corsa Atualizado",
   "specifications": {
     "color": "red",
     "engine": "1.6L",
